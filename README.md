@@ -63,29 +63,9 @@ Username: cxt-admin
 Password: admin
 ```
 
-When the platform is started initially, there are no MicroApps registered.
-
 ## Starting the MicroApp Demo
 
-The MicroApp-Demo is shipped as another Docker image. You need to provide information
-about how to connect to the CXT Platform when starting the image:
-
-```shell
-docker run -it --network="host" \
-        -e SPRING_APPLICATION_JSON='{
-                "server.port":"8666",
-                "eureka.client.enabled":"true",
-                "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@localhost:8080/cxt-platform/eureka",
-                "eureka.instance.metadata-map.internalUrl":"http://localhost:8666/",
-                "eureka.instance.homePageUrl":"http://localhost:8666/",
-                "cxt.firstspirit-connector.url":"http://localhost:8080/cxt-platform/firstspirit-connector/"
-        }' \
-        cp-es-hackathon.artifactory.e-spirit.de/cxt/microapp-demo:1.5-fs5.2.201209
-```
-
-After that, the MicroApp is available in standalone mode: http://localhost:8666/
-
-Wait a few seconds (up to one minute) and check the status page again: http://localhost:8080/cxt-platform/status
+A MicroApp-Demo is also shipped and started as another Docker image. Wait a few seconds (up to one minute) and check the status page: [http://localhost:8080/cxt-platform/status](http://localhost:8080/cxt-platform/status)
 
 Please observe that the MicroApp is now registered with the platform.
 

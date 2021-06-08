@@ -4,6 +4,23 @@ This repository is used to provide a basic setup for the CXT Platform.
 Using Docker images, it is very simple to create a test environment
 with only a few commands.
 
+## Overview
+
+```
++------------------------------------------+  +------------------+
+|                                          |  |                  |
+| +------------------+  +----------------+ |  |                  |
+| |localhost:8100    |  |localhost:8666  | |  | localhost:8200   |
+| |                  |  |                | |  |                  |
+| |CXT-Platform      |  |Demo-MicroApp   | |  | example-client   |
+| +------------------+  +----------------+ |  |                  |
+|                                          |  |                  |
+|  Docker                                  |  | ./example-client |
+|                                          |  |                  |
++------------------------------------------+  +------------------+
+```
+
+
 ## Docker Registry Setup
 
 For this Hackathon we created a temporary Docker registry.

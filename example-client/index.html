@@ -1,15 +1,54 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-fs-layout="standard">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Example MicroApp Client</title>
+    <link href="./fsui.css" rel="stylesheet">
+
 </head>
 <body>
 
+<header class="fs-toolbar">
+    <a href="#">
+        <h1>CXT Example Client</h1>
+    </a>
+</header>
+<div class="fs-main-container">
+    <nav class="fs-sidebar"></nav>
+    <main class="fs-main fs-padding-m">
+        <div class="fs-panel">
+            <div class="fs-btn-group">
+                <button class="fs-btn" id="listAll">List all available Buttons</button>
+            </div>
+            <div class="fs-btn-group" id="availableButtons"></div>
+        </div>
+    </main>
+</div>
 
+<script src="http://localhost:8080/cxt-platform/microapps/api.umd.js"></script>
+<script type="module">
+    import {html, render} from 'https://unpkg.com/lit-html?module';
+    const {CxtMicroApps} = CXT;
+
+    const availableButtons = document.querySelector('#availableButtons')
+
+    document.querySelector('#listAll').addEventListener('click',
+        async function listAllButtons() {
+            const tmpl = (buttons) => html`
+                ${buttons.map((btn) => html`
+                    <button class="fs-btn fs-btn-secondary"
+                        @click="${() => {console.log(btn);btn.action()}}">
+                        ${btn.title}
+                    </button>
+                `)}
+            `
+            const buttons = await CxtMicroApps.getButtons({})
+            render(tmpl(buttons), availableButtons)
+        })
+</script>
 
 </body>
 </html>

@@ -20,6 +20,8 @@ with only a few commands.
 +------------------------------------------+  +------------------+
 ```
 
+ * First fire up the cxt-platform as described below.
+ * Then you can write your own cxt-client that integrates the demo micro app. [example-client/README.md](./example-client/README.md)
 
 ## Docker Registry Setup
 
@@ -47,7 +49,7 @@ YAML file. It declares two docker containers and their configuration.
 
 When both services started successfully, open the status page in your browser:
 
-http://localhost:8080/cxt-platform/status
+[http://localhost:8080/cxt-platform/status](http://localhost:8080/cxt-platform/status)
 
 Viewing the status page requires admin access, so you will be redirected to
 Keycloak for login. Please use these credentials:

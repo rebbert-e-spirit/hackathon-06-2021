@@ -13,7 +13,7 @@ For example
 ```
 python -m SimpleHTTPServer 8200
 #or
-python -m http.server 8200
+python3 -m http.server 8200
 #or
 npx serve -l 8200
 ```

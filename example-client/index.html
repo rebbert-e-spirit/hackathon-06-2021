@@ -28,26 +28,24 @@
     </main>
 </div>
 
-<script src="http://localhost:8080/cxt-platform/microapps/api.umd.js"></script>
-<script type="module">
-    import {html, render} from 'https://unpkg.com/lit-html?module';
-    const {CxtMicroApps} = CXT;
+<script src="http://localhost:8080/cxt-platform/microapps/api.js"></script>
 
+<script>
     const availableButtons = document.querySelector('#availableButtons')
-
-    document.querySelector('#listAll').addEventListener('click',
-        async function listAllButtons() {
-            const tmpl = (buttons) => html`
-                ${buttons.map((btn) => html`
-                    <button class="fs-btn fs-btn-secondary"
-                        @click="${() => {console.log(btn);btn.action()}}">
-                        ${btn.title}
-                    </button>
-                `)}
-            `
-            const buttons = await CxtMicroApps.getButtons({})
-            render(tmpl(buttons), availableButtons)
-        })
+    async function fetchAllButtons(){
+        console.log('fetch')
+        const buttons = await CxtMicroApps.getButtons({});
+        console.log(buttons);
+        availableButtons.innerHTML = ''
+        for(let btn of buttons){
+            const button = document.createElement('button')
+            button.classList.add('fs-btn','fs-btn-secondary');
+            button.innerText = btn.title;
+            button.addEventListener('click', ()=>btn.action())
+            availableButtons.appendChild(button)
+        }
+    }
+    document.querySelector('#listAll').addEventListener('click', fetchAllButtons)
 </script>
 
 </body>

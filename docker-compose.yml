@@ -35,3 +35,20 @@ services:
       KEYCLOAK_REALM: CXT
       KEYCLOAK_RESOURCE: cxt-platform
       KEYCLOAK_PUBLIC-CLIENT: "true"
+
+  microapp-demo:
+    depends_on:
+      - "cxt-platform"
+    image: "cp-es-hackathon.artifactory.e-spirit.de/cxt/microapp-demo:1.5-fs5.2.201209"
+    network_mode: "host"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "server.port":"8666",
+          "eureka.client.enabled":"true",
+          "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@localhost:8080/cxt-platform/eureka",
+          "eureka.instance.metadata-map.internalUrl":"http://localhost:8666/",
+          "eureka.instance.homePageUrl":"http://localhost:8666/",
+          "cxt.firstspirit-connector.url":"http://localhost:8080/cxt-platform/firstspirit-connector/"
+          }'
+
+

@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+
+  keycloak:
+    image: cp-es-hackathon.artifactory.e-spirit.de/jboss/keycloak:12.0.2
+    ports:
+      - "8100:8080"
+    volumes:
+      - type: bind
+        source: ./keycloak-resources
+        target: /tmp/test-resources
+    command: [ "-Dkeycloak.profile.feature.token_exchange=enabled",
+               "-Dkeycloak.profile.feature.upload_scripts=enabled",
+               "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING",
+               "-Dkeycloak.migration.action=import",
+               "-Dkeycloak.migration.provider=singleFile",
+               "-Dkeycloak.migration.file=/tmp/test-resources/realm-export.json" ]
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+
+  cxt-platform:
+    depends_on:
+      - "keycloak"
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt-platform:2.2-HACKATHON
+    network_mode: "host"
+    environment:
+      SERVER_SERVLET_CONTEXT-PATH: /cxt-platform
+      CXT_PLATFORM_INTERNAL-URL: http://localhost:8080/cxt-platform
+      CXT_PLATFORM_AUTHPROVIDER: KEYCLOAK
+      CXT_PLATFORM_EUREKA_PASSWORD: GEHEIM
+      CXT_PLATFORM_MICROAPPS_CSP-ORIGINS: "'self'"
+      KEYCLOAK_AUTH-SERVER-URL: http://localhost:8100/auth
+      KEYCLOAK_REALM: CXT
+      KEYCLOAK_RESOURCE: cxt-platform
+      KEYCLOAK_PUBLIC-CLIENT: "true"

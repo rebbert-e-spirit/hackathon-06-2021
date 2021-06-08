@@ -2,7 +2,7 @@
 
 
 ## Prerequisite
-We assume that the cxt-platform is Running under `localhost:8100`.
+We assume that the cxt-platform is Running under `localhost:8080`.
 See [../README.md](../README.md) for details. 
 
 ## Start this application

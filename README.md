@@ -10,18 +10,22 @@ with only a few commands.
 +------------------------------------------+  +------------------+
 |                                          |  |                  |
 | +------------------+  +----------------+ |  |                  |
-| |localhost:8100    |  |localhost:8666  | |  | localhost:8200   |
+| |  localhost:8100  |  | localhost:8080 | |  | localhost:8200   |
 | |                  |  |                | |  |                  |
-| |CXT-Platform      |  |Demo-MicroApp   | |  | example-client   |
+| |     Keycloak     |  |  CXT Platform  | |  | example-client   |
 | +------------------+  +----------------+ |  |                  |
 |                                          |  |                  |
-|  Docker                                  |  | ./example-client |
+|                       +----------------+ |  |                  |
+|                       | localhost:8666 | |  | ./example-client |
+|       Docker          |                | |  |                  |
+|                       | Demo-MicroApp  | |  |                  |
+|                       +----------------+ |  |                  |
 |                                          |  |                  |
 +------------------------------------------+  +------------------+
 ```
 
- * First fire up the cxt-platform as described below.
- * Then you can write your own cxt-client that integrates the demo micro app. [example-client/README.md](./example-client/README.md)
+ * First fire up the CXT Platform as described below.
+ * Then you can write your own CXT client that integrates the demo MicroApp. [example-client/README.md](./example-client/README.md)
 
 ## Docker Registry Setup
 

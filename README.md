@@ -10,16 +10,12 @@ with only a few commands.
 +------------------------------------------+  +------------------+
 |                                          |  |                  |
 | +------------------+  +----------------+ |  |                  |
-| |  localhost:8100  |  | localhost:8080 | |  | localhost:8200   |
+| |  localhost:8080  |  | localhost:8666 | |  | localhost:8200   |
 | |                  |  |                | |  |                  |
-| |     Keycloak     |  |  CXT Platform  | |  | example-client   |
+| |   CXT Platform   |  | Demo-MicroApp  | |  | example-client   |
 | +------------------+  +----------------+ |  |                  |
 |                                          |  |                  |
-|                       +----------------+ |  |                  |
-|                       | localhost:8666 | |  | ./example-client |
-|       Docker          |                | |  |                  |
-|                       | Demo-MicroApp  | |  |                  |
-|                       +----------------+ |  |                  |
+|                   Docker                 |  | ./example-client |
 |                                          |  |                  |
 +------------------------------------------+  +------------------+
 ```
@@ -38,7 +34,7 @@ $ docker login cp-es-hackathon.artifactory.e-spirit.de
 
 ## Starting the CXT Platform
 
-Starting the CXT Platform as well as the required Keycloak server
+Starting the CXT Platform as well as the Demo-MicroApp
 is done by using a `docker-compose.yml` file. After cloning this repository,
 just run `docker-compose up`:
 
@@ -55,19 +51,8 @@ When both services started successfully, open the status page in your browser:
 
 [http://localhost:8080/cxt-platform/status](http://localhost:8080/cxt-platform/status)
 
-Viewing the status page requires admin access, so you will be redirected to
-Keycloak for login. Please use these credentials:
-
-```
-Username: cxt-admin
-Password: admin
-```
-
-## Starting the MicroApp Demo
-
-A MicroApp-Demo is also shipped and started as another Docker image. Wait a few seconds (up to one minute) and check the status page: [http://localhost:8080/cxt-platform/status](http://localhost:8080/cxt-platform/status)
-
-Please observe that the MicroApp is now registered with the platform.
+Please verify that the MicroApp is registered with the platform.
+This may take up to one minute after both services have been started.
 
 ## REST: Get all available MicroApps
 

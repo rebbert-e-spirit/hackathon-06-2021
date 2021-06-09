@@ -1,29 +1,10 @@
 version: "3.7"
 services:
 
-  keycloak:
-    image: cp-es-hackathon.artifactory.e-spirit.de/jboss/keycloak:12.0.2
-    ports:
-      - "8100:8080"
-    volumes:
-      - type: bind
-        source: ./keycloak-resources
-        target: /tmp/test-resources
-    command: [ "-Dkeycloak.profile.feature.token_exchange=enabled",
-               "-Dkeycloak.profile.feature.upload_scripts=enabled",
-               "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING",
-               "-Dkeycloak.migration.action=import",
-               "-Dkeycloak.migration.provider=singleFile",
-               "-Dkeycloak.migration.file=/tmp/test-resources/realm-export.json" ]
-    environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-
   cxt-platform:
-    depends_on:
-      - "keycloak"
-    image: cp-es-hackathon.artifactory.e-spirit.de/cxt-platform:2.2-HACKATHON
-    network_mode: "host"
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt-platform:2.2.1-HACKATHON
+    ports:
+      - "8080:8080"
     environment:
       SERVER_SERVLET_CONTEXT-PATH: /cxt-platform
       CXT_PLATFORM_INTERNAL-URL: http://localhost:8080/cxt-platform
@@ -37,18 +18,19 @@ services:
       KEYCLOAK_PUBLIC-CLIENT: "true"
 
   microapp-demo:
-    depends_on:
-      - "cxt-platform"
-    image: "cp-es-hackathon.artifactory.e-spirit.de/cxt/microapp-demo:1.5-fs5.2.201209"
-    network_mode: "host"
+    links:
+      - cxt-platform
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/microapp-demo:1.5-fs5.2.201209
+    ports:
+      - "8666:8666"
     environment:
       SPRING_APPLICATION_JSON: '{
           "server.port":"8666",
           "eureka.client.enabled":"true",
-          "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@localhost:8080/cxt-platform/eureka",
-          "eureka.instance.metadata-map.internalUrl":"http://localhost:8666/",
+          "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@cxt-platform:8080/cxt-platform/eureka",
+          "eureka.instance.metadata-map.internalUrl":"http://microapp-demo:8666/",
           "eureka.instance.homePageUrl":"http://localhost:8666/",
-          "cxt.firstspirit-connector.url":"http://localhost:8080/cxt-platform/firstspirit-connector/"
+          "cxt.firstspirit-connector.url":"http://cxt-platform:8080/cxt-platform/firstspirit-connector/"
           }'
 
 

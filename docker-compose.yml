@@ -10,7 +10,7 @@ services:
       CXT_PLATFORM_INTERNAL-URL: http://localhost:8080/cxt-platform
       CXT_PLATFORM_AUTHPROVIDER: KEYCLOAK
       CXT_PLATFORM_EUREKA_PASSWORD: GEHEIM
-      CXT_PLATFORM_MICROAPPS_CSP-ORIGINS: "'self' http://localhost:*"
+      CXT_PLATFORM_MICROAPPS_CSP-ORIGINS: "'self' http://localhost:* *.crownpeak.com *.crownpeak.net"
       CXT_PLATFORM_CORS-ALLOWED-ORIGINS: "*"
       KEYCLOAK_AUTH-SERVER-URL: http://localhost:8100/auth
       KEYCLOAK_REALM: CXT

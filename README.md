@@ -54,6 +54,15 @@ When both services started successfully, open the status page in your browser:
 Please verify that the MicroApp is registered with the platform.
 This may take up to one minute after both services have been started.
 
+## Checking and testing the example-client
+
+There is an example client application. It can be used to integrate the micro-apps.
+
+If the docker stack is up an running, it should be reachable under:
+[http://localhost:8200/](http://localhost:8200/)
+
+You can change it, by edit the files in the [./example-client](./example-client) folder.
+
 ## REST: Get all available MicroApps
 
 Let's start with the integration. You can fetch all available MicroApps via REST.

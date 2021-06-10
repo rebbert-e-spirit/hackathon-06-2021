@@ -54,8 +54,8 @@ services:
       - cxt-platform
     image: python:3
     ports:
-      - "8300:8300"
-    command: python -m http.server 8300
+      - "8200:8200"
+    command: python -m http.server 8200
     working_dir: /example-client
     volumes:
       - ./example-client:/example-client

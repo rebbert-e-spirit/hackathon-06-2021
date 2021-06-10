@@ -36,7 +36,7 @@ services:
   hackathon-microapp:
     links:
       - cxt-platform
-    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.3-HACKATHON
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.4-HACKATHON
     ports:
       - "8777:8777"
     volumes:
@@ -55,7 +55,7 @@ services:
   example-client:
     links:
       - cxt-platform
-    image: python:3
+    image: cp-es-hackathon.artifactory.e-spirit.de/python:3
     ports:
       - "8200:8200"
     command: python -m http.server 8200

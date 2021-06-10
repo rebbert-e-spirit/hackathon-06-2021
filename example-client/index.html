@@ -26,6 +26,19 @@
             <div class="fs-btn-group" id="availableButtons"></div>
         </div>
 
+
+        <div class="fs-panel">
+            <div class="fs-btn-group">
+                <button class="fs-btn" id="openExampleMicroApp">Open Example MicroApp</button>
+            </div>
+            <div class="fs-input-field">
+                    <textarea type="text" id="message" placeholder="Type your message..."
+                              rows="15"></textarea>
+                <label class="fs-form-label" for="message">Message</label>
+            </div>
+
+        </div>
+
         <div class="fs-panel">
             <div class="fs-btn-group">
                 <button class="fs-btn" id="embed">Embed a Micro App</button>
@@ -63,6 +76,25 @@
         }
     }
     document.querySelector('#listAll').addEventListener('click', fetchAllButtons)
+
+
+    //
+    // Example 2
+    // Open example micro app
+    //
+    async function openExampleMicroApp(){
+        const message = document.querySelector('#message').value
+        const result = await CxtMicroApps.requestMicroApp(
+            'cp-hackathon-micro-app-demo',
+            {example: 'external'},
+            { userData: {message}})
+        document.querySelector('#message').value = result.userData.translatedMessage
+    }
+    document.querySelector('#openExampleMicroApp').addEventListener('click', openExampleMicroApp)
+
+
+
+
 </script>
 
 </body>

@@ -39,9 +39,12 @@ services:
     image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.3-HACKATHON
     ports:
       - "8777:8777"
+    volumes:
+      - ./example-micro-app:/external
     environment:
       SPRING_APPLICATION_JSON: '{
             "server.port":"8777",
+            "spring.resources.static-locations": "file:/external,classpath:/public/,classpath:/static/,classpath:/resources/,classpath:/META-INF/resources/",
             "eureka.client.enabled":"true",
             "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@cxt-platform:8080/cxt-platform/eureka",
             "eureka.instance.metadata-map.internalUrl":"http://hackathon-microapp:8777/",

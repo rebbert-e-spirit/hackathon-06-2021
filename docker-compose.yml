@@ -49,4 +49,15 @@ services:
             "cxt.firstspirit-connector.url":"http://cxt-platform:8080/cxt-platform/firstspirit-connector/"
             }'
 
+  example-client:
+    links:
+      - cxt-platform
+    image: python:3
+    ports:
+      - "8300:8300"
+    command: python -m http.server 8300
+    working_dir: /example-client
+    volumes:
+      - ./example-client:/example-client
+
 

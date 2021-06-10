@@ -33,4 +33,20 @@ services:
           "cxt.firstspirit-connector.url":"http://cxt-platform:8080/cxt-platform/firstspirit-connector/"
           }'
 
+  hackathon-microapp:
+    links:
+      - cxt-platform
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.3-HACKATHON
+    ports:
+      - "8777:8777"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+            "server.port":"8777",
+            "eureka.client.enabled":"true",
+            "eureka.client.serviceUrl.defaultZone":"http://cxt_eureka:GEHEIM@cxt-platform:8080/cxt-platform/eureka",
+            "eureka.instance.metadata-map.internalUrl":"http://hackathon-microapp:8777/",
+            "eureka.instance.homePageUrl":"http://localhost:8777/",
+            "cxt.firstspirit-connector.url":"http://cxt-platform:8080/cxt-platform/firstspirit-connector/"
+            }'
+
 

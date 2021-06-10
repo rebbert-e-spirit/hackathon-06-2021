@@ -25,17 +25,34 @@
             </div>
             <div class="fs-btn-group" id="availableButtons"></div>
         </div>
+
+        <div class="fs-panel">
+            <div class="fs-btn-group">
+                <button class="fs-btn" id="embed">Embed a Micro App</button>
+            </div>
+
+            <div id="embedTarget" style="width:100%; height: 400px; background-color: lightblue;">
+
+            </div>
+        </div>
+
+
     </main>
 </div>
 
 <script src="http://localhost:8080/cxt-platform/microapps/api.js"></script>
 
 <script>
+
+
+    //
+    // Example 1
+    // Fetch all available micro app as buttons
+    //
     const availableButtons = document.querySelector('#availableButtons')
     async function fetchAllButtons(){
-        console.log('fetch')
+
         const buttons = await CxtMicroApps.getButtons({});
-        console.log(buttons);
         availableButtons.innerHTML = ''
         for(let btn of buttons){
             const button = document.createElement('button')

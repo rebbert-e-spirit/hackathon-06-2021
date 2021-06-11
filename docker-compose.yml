@@ -36,7 +36,8 @@ services:
   hackathon-microapp:
     links:
       - cxt-platform
-    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.5-HACKATHON
+    image: cp-es-hackathon.artifactory.e-spirit.de/cxt/hackathon-microapp-demo:0.0.6-HACKATHON
+    #image: cxt/hackathon-microapp-demo
     ports:
       - "8777:8777"
     volumes:
